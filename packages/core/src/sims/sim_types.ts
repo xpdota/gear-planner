@@ -176,6 +176,15 @@ export type DotInfo = Readonly<{
 }>;
 
 /**
+ * Represents a channeled action.
+ */
+export type ChannelInfo = Readonly<{
+    duration: number,
+    tickPotency: number,
+    id: number
+}>;
+
+/**
  * Represents combo-related data.
  *
  * comboFrom is a list of abilities that this ability can combo after. e.g. if we have a 1-2-3 combo,
@@ -242,6 +251,7 @@ export type DamagingAbility = Readonly<{
     autoCrit?: boolean,
     autoDh?: boolean,
     dot?: DotInfo,
+    channel?: ChannelInfo
 }>;
 
 /**
@@ -403,6 +413,12 @@ export type DotDamageUnf = {
     actualTickCount?: number
 };
 
+export type ChannelDamageUnf = {
+    fullDurationTicks: number, // does not support indefinite channels (none currently exist)
+    damagePerTick: ComputedDamage,
+    actualTickCount?: number
+};
+
 export type ComputedDamage = ValueWithDev;
 
 /**
@@ -438,6 +454,10 @@ export type PreDmgUsedAbility = {
      */
     dot?: DotDamageUnf,
     /**
+     * If a channeled action, the channeled damage
+     */
+    channel?: ChannelDamageUnf,
+    /**
      * The total cast time from usedAt
      */
     castTimeFromStart: number,
@@ -471,7 +491,8 @@ export type PreDmgUsedAbility = {
 
 export type PostDmgUsedAbility = PreDmgUsedAbility & {
     directDamage: ComputedDamage,
-    dot?: DotDamageUnf
+    dot?: DotDamageUnf,
+    channel?: ChannelDamageUnf
 }
 /**
  * Represents a pseudo-ability used to round out a cycle to exactly 120s.
@@ -494,6 +515,7 @@ export type FinalizedAbility = {
     directDamage: number,
     directDamageFull: ComputedDamage,
     dotInfo: DotDamageUnf,
+    channelInfo: ChannelDamageUnf,
     combinedEffects: CombinedBuffEffect,
     ability: Ability,
     buffs: Buff[]
@@ -661,7 +683,8 @@ export type Buff = PersonalBuff | PartyBuff;
 
 export type DamageResult = {
     readonly directDamage: ComputedDamage | null,
-    readonly dot: DotDamageUnf | null
+    readonly dot: DotDamageUnf | null,
+    readonly channel: ChannelDamageUnf | null
 }
 
 /**

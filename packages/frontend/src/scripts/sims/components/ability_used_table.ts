@@ -126,7 +126,9 @@ export class AbilitiesUsedTable extends CustomTable<DisplayRecordFinalized> {
                             return document.createTextNode('--');
                         }
                         let text = used.totalDamage.toFixed(2);
-                        if (used.partialRate !== null || (used.dotInfo && used.dotInfo.fullDurationTicks !== "indefinite" && used.dotInfo.actualTickCount < used.dotInfo.fullDurationTicks)) {
+                        if (used.partialRate !== null
+                            || (used.dotInfo && used.dotInfo.fullDurationTicks !== "indefinite" && used.dotInfo.actualTickCount < used.dotInfo.fullDurationTicks)
+                            || (used.channelInfo && used.channelInfo.actualTickCount < used.channelInfo.fullDurationTicks)) {
                             text += '*';
                         }
                         return document.createTextNode(text);
@@ -148,6 +150,9 @@ export class AbilitiesUsedTable extends CustomTable<DisplayRecordFinalized> {
                             else {
                                 title.push(`This ability is a DoT. It dealt ${value.dotInfo.actualTickCount}/${value.dotInfo.fullDurationTicks} ticks of ${value.dotInfo.damagePerTick.expected.toFixed(3)} each.\n`);
                             }
+                        }
+                        if (value.channelInfo) {
+                            title.push(`This ability is a channel. It dealt ${value.channelInfo.actualTickCount}/${value.channelInfo.fullDurationTicks} ticks of ${value.channelInfo.damagePerTick.expected.toFixed(3)} each.\n`);
                         }
                         if (title.length > 0) {
                             colElement.title = title.join('\n');

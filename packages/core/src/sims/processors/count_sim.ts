@@ -158,6 +158,11 @@ implements Simulation<ResultType, InternalSettingsType, ExternalCountSettings<In
                     console.debug(`Skill ${skill.name}, count ${count}, duration ${bucket.maxDuration}, total ${valueWithDev.expected}`);
                     result.push(valueWithDev);
                 }
+                if (dmg.channel) {
+                    const valueWithDev = multiplyIndependent(dmg.channel.damagePerTick, dmg.channel.fullDurationTicks * count);
+                    console.debug(`Skill ${skill.name}, count ${count}, duration ${bucket.maxDuration}, total ${valueWithDev.expected}`);
+                    result.push(valueWithDev);
+                }
                 return result;
             }));
         });
