@@ -1300,6 +1300,10 @@ table.gear-items-table, table.food-items-table {
         }
       }
 
+      &:not(:first-child) {
+        cursor: pointer;
+      }
+
       &:hover {
         &[is-selected="true"] {
           .remove-item-button, .remove-food-button {
