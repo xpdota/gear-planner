@@ -13,6 +13,7 @@ import {whmNewSheetSpec} from "./healer/whm_new_sheet_sim";
 import {whmSheetSpec} from "./healer/whm_sheet_sim";
 import {mpSimSpec} from "./healer/healer_mp";
 import {ninSpec} from "./melee/nin/nin_lv100_sim";
+import {drg90SimSpec} from "./melee/drg/drg_90_sim";
 import {rprSheetSpec} from "./melee/rpr/rpr_sheet_sim";
 import {mnkSpec} from "./melee/mnk/mnk_sim";
 import {samSpec} from "./melee/sam/sam_lv100_sim";
@@ -54,6 +55,7 @@ export function registerDefaultSims() {
     registerSim(whmNewSheetSpec);
     registerSim(mpSimSpec);
     // Melee
+    registerSim(drg90SimSpec);
     registerSim(rprSheetSpec);
     registerSim(vprSheetSpec);
     registerSim(mnkSpec);
