@@ -324,6 +324,12 @@ export type BaseAbility = Readonly<{
      */
     fixedGcd?: boolean,
     /**
+     * If the ability has a fixed cast _but_ a scaling recast, set to true.
+     * The only current occurrence of this in game is the Iaijutsu and Ogi Namikiri weaponskills after
+     * the level 74 talent.
+     */
+    fixedCast?: boolean,
+    /**
      * Override the default animation lock
      */
     animationLock?: number,

@@ -1363,7 +1363,7 @@ export class CycleProcessor {
         const base = ability.cast ?? (STANDARD_ANIMATION_LOCK + CASTER_TAX);
         const stats = effects.modifyStats(this.stats);
         const haste = effects.haste + stats.haste(ability.attackType);
-        return ability.fixedGcd ? base :
+        return (ability.fixedGcd || ability.fixedCast) ? base :
             (ability.attackType === "Spell") ?
                 (stats.gcdMag(base ?? this.gcdBase, haste)) :
                 (stats.gcdPhys(base ?? this.gcdBase, haste));
